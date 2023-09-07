@@ -8,6 +8,7 @@ import {
   Image,
   Text,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom'; // Import Link component
 
 const MovieListings = () => {
   const [movies, setMovies] = useState([]);
@@ -19,19 +20,19 @@ const MovieListings = () => {
       // Replace this with your actual API fetch code
       const sampleMovies = [
         {
-          id: 1,
+          id: "64f8a0311a082cc4c9f1c28b",
           title: 'Movie 1',
           releaseYear: 2022,
           posterUrl: 'https://via.placeholder.com/150',
         },
         {
-          id: 2,
+          id: "64f8a0311a082cc4c9f1c28b",
           title: 'Movie 2',
           releaseYear: 2023,
           posterUrl: 'https://via.placeholder.com/150',
         },
         {
-          id: 3,
+          id: "64f8a0311a082cc4c9f1c28b",
           title: 'Movie 3',
           releaseYear: 2021,
           posterUrl: 'https://via.placeholder.com/150',
@@ -52,15 +53,18 @@ const MovieListings = () => {
       ) : (
         <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={8}>
           {movies.map((movie) => (
-            <Box key={movie.id} borderWidth="1px" borderRadius="lg" overflow="hidden">
-              <Image src={movie.posterUrl} alt={movie.title} />
-              <Box p={4}>
-                <Heading as="h3" size="md" mb={2}>
-                  {movie.title}
-                </Heading>
-                <Text>Released: {movie.releaseYear}</Text>
+            // Wrap each movie box in a Link component
+            <Link key={movie.id} to={`/movie/${movie.id}`}>
+              <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
+                <Image src={movie.posterUrl} alt={movie.title} />
+                <Box p={4}>
+                  <Heading as="h3" size="md" mb={2}>
+                    {movie.title}
+                  </Heading>
+                  <Text>Released: {movie.releaseYear}</Text>
+                </Box>
               </Box>
-            </Box>
+            </Link>
           ))}
         </SimpleGrid>
       )}
